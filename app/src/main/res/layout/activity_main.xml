@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3E3E3E"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/dest_circle"
+        android:layout_width="33dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="40dp"
+        android:background="#ffffff"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/second_view"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/second_view"
+        app:srcCompat="@drawable/black_circle" />
+
+    <ImageButton
+        android:id="@+id/src_circle"
+        android:layout_width="33dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="16dp"
+        android:background="#ffffff"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/second_view"
+        app:layout_constraintTop_toTopOf="@+id/second_view"
+        app:srcCompat="@drawable/orange_circle" />
+
+    <ImageButton
+        android:id="@+id/accept"
+        android:layout_width="47dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="84dp"
+        android:background="#3E3E3E"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/correct"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/right_btn" />
+
+    <ImageButton
+        android:id="@+id/refuse"
+        android:layout_width="47dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="84dp"
+        android:background="#3E3E3E"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toStartOf="@+id/left_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cross" />
+
+    <ImageButton
+        android:id="@+id/left_btn"
+        android:layout_width="22dp"
+        android:layout_height="36dp"
+
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="76dp"
+        android:background="#3E3E3E"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/right_btn"
+        app:layout_constraintEnd_toStartOf="@+id/username"
+        app:layout_constraintStart_toEndOf="@+id/refuse"
+        app:layout_constraintTop_toTopOf="@+id/right_btn"
+        app:srcCompat="@drawable/left" />
+
+    <ImageButton
+        android:id="@+id/right_btn"
+        android:layout_width="22dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="76dp"
+        android:background="#3E3E3E"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/accept"
+        app:layout_constraintEnd_toStartOf="@+id/accept"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/accept"
+        app:srcCompat="@drawable/right" />
+
+    <ImageButton
+        android:id="@+id/star"
+        android:layout_width="25dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="45dp"
+
+        android:background="@color/btn_colors"
+        android:foregroundGravity="center"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/fleche"
+        android:layout_width="23dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:rotation="180"
+        android:scaleType="centerCrop"
+        android:src="@drawable/long_arrow_up_52px"
+        app:layout_constraintStart_toStartOf="@+id/src_circle"
+        app:layout_constraintTop_toBottomOf="@+id/src_circle" />
+
+    <TextView
+        android:id="@+id/cost_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Coût de la course"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/cost_value"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/chemin_dest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:text="chemin de yassir, Bir Morad Rais, Alger "
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintTop_toBottomOf="@+id/dest_place" />
+
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="00:20"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cost_value"
+        android:layout_width="167dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="1 0000 DA"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/src_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="232dp"
+        android:layout_marginRight="232dp"
+        android:text="Said Hamdine"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/chemin_src"
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toEndOf="@+id/src_circle"
+        app:layout_constraintTop_toTopOf="@+id/second_view"
+        app:layout_constraintVertical_bias="0.703" />
+
+    <TextView
+        android:id="@+id/chemin_src"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="chemin de yassir, Bir Morad Rais, Alger "
+        app:layout_constraintBottom_toTopOf="@+id/second_view"
+        app:layout_constraintStart_toStartOf="@+id/src_place"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/dest_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginRight="240dp"
+        android:text="Kouba"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/chemin_dest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="à 4 min"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toEndOf="@+id/src_place"
+        app:layout_constraintTop_toTopOf="@+id/second_view" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Hichem Bennaceur"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_img" />
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginRight="180dp"
+        android:text="4.5"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/star"
+        app:layout_constraintTop_toTopOf="@+id/star" />
+
+    <View
+        android:id="@+id/second_view"
+        android:layout_width="335dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#ffffff"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="335dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="258dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintTop_toBottomOf="@+id/chemin_src" />
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/user_img"
+        android:layout_width="139dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:scaleType="center"
+        android:src="@drawable/h"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toStartOf="@+id/right_btn"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toEndOf="@+id/left_btn"
+        app:layout_constraintTop_toBottomOf="@+id/second_view"
+        app:riv_border_color="#333333"
+        app:riv_border_width="1dip"
+        app:riv_corner_radius="60dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true"
+        app:riv_tile_mode="repeat" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
