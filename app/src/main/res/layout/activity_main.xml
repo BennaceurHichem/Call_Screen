@@ -7,6 +7,48 @@
     android:background="#3E3E3E"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="340dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/second_view"
+        android:layout_width="340dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:background="#ffffff"
+
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="258dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintTop_toBottomOf="@+id/chemin_src" />
+
     <ImageButton
         android:id="@+id/dest_circle"
         android:layout_width="33dp"
@@ -33,50 +75,65 @@
 
     <ImageButton
         android:id="@+id/accept"
-        android:layout_width="39dp"
+        android:layout_width="42dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="56dp"
         android:background="#3E3E3E"
-        android:padding="8dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/correct"
+        android:foregroundGravity="bottom"
+        android:padding="0dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/check_mark"
         app:layout_constraintBottom_toBottomOf="@+id/user_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/right_btn"
         app:layout_constraintTop_toTopOf="@+id/user_img"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <ImageButton
         android:id="@+id/refuse"
-        android:layout_width="39dp"
+        android:layout_width="42dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:background="#3E3E3E"
-        android:padding="8dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/username"
+
+        android:padding="2dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/left_btn"
         app:layout_constraintEnd_toStartOf="@+id/left_btn"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/left_btn"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/cross" />
+
+    <ImageButton
+        android:id="@+id/left_btn"
+        android:layout_width="23dp"
+        android:layout_height="45dp"
+
+        android:background="#3E3E3E"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/right_btn"
+        app:layout_constraintEnd_toStartOf="@+id/username"
+        app:layout_constraintStart_toEndOf="@+id/refuse"
+        app:layout_constraintTop_toTopOf="@+id/right_btn"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/left" />
 
     <ImageButton
         android:id="@+id/star"
         android:layout_width="25dp"
         android:layout_height="33dp"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/btn_colors"
         android:foregroundGravity="center"
         android:scaleType="centerInside"
@@ -87,7 +144,7 @@
     <ImageButton
         android:id="@+id/right_btn"
         android:layout_width="22dp"
-        android:layout_height="36dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -100,20 +157,6 @@
         app:layout_constraintTop_toTopOf="@+id/accept"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/right" />
-
-    <ImageButton
-        android:id="@+id/left_btn"
-        android:layout_width="22dp"
-        android:layout_height="36dp"
-
-        android:background="#3E3E3E"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/refuse"
-        app:layout_constraintEnd_toStartOf="@+id/username"
-        app:layout_constraintStart_toEndOf="@+id/refuse"
-        app:layout_constraintTop_toTopOf="@+id/refuse"
-        app:layout_constraintVertical_bias="0.468"
-        app:srcCompat="@drawable/left" />
 
     <ImageView
         android:id="@+id/fleche"
@@ -265,12 +308,13 @@
 
     <TextView
         android:id="@+id/rate"
-        android:layout_width="wrap_content"
+        android:layout_width="25dp"
         android:layout_height="25dp"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
         android:text="4.5"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -279,74 +323,35 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/star"
         app:layout_constraintTop_toTopOf="@+id/star"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="320dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:id="@+id/second_view"
-        android:layout_width="320dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#ffffff"
-
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="258dp"
-        android:layout_height="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="@+id/second_view"
-        app:layout_constraintTop_toBottomOf="@+id/chemin_src" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/user_img"
-        android:layout_width="130dp"
-        android:layout_height="132dp"
+        android:layout_width="153dp"
+        android:layout_height="156dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="58dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/color_bg"
+        android:layout_marginBottom="10dp"
+       android:background="@drawable/color_bg"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center_horizontal"
         android:scaleType="center"
         android:src="@drawable/h"
-        app:layout_constraintBottom_toBottomOf="@+id/refuse"
+        app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toStartOf="@+id/right_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/left_btn"
-        app:layout_constraintTop_toTopOf="@+id/refuse"
-        app:layout_constraintVertical_bias="0.455"
+        app:layout_constraintTop_toBottomOf="@+id/second_view"
+
         app:riv_border_color="#333333"
         app:riv_border_width="1dip"
         app:riv_corner_radius="60dip"
         app:riv_mutate_background="true"
-
         app:riv_oval="true"
         app:riv_tile_mode="repeat" />
 

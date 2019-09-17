@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.skyfishjy.library.RippleBackground;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         private ImageButton destCircle,srcCircle;
         private ImageView fleche;
         private View view1,view2;
+        RoundedImageView riv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         costMessage.bringToFront();
         costValue.bringToFront();
 
-        //ripple animation
+        //Translation animation
+
+        Animation animation = new TranslateAnimation(0, 100,0, 0);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        costValue.startAnimation(animation);
+        costValue.setVisibility(View.INVISIBLE);
 
 
 
