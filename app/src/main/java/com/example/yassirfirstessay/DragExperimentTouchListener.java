@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
 public class DragExperimentTouchListener implements View.OnTouchListener {
@@ -58,24 +60,50 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
 
                 if (arg0.getX()>=acceptPos)
                 {
-                    // accept the call case
+                    //call accepted
                     System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
                     Intent intent = new Intent(arg0.getContext(), Main2Activity.class);
                     arg0.getContext().startActivity(intent);
                     Toast.makeText(arg0.getContext(), "Call accepted ", Toast.LENGTH_SHORT).show();
+                    arg0.setX(acceptPos+20);
+
+
+                }
+                else
+                {
+                    if(arg0.getX()>initX-arg0.getWidth()/2){
+                       // Animation animation = new TranslateAnimation(arg0.getX(), initX-arg0.getWidth()/2,0, 0);
+                        //animation.setDuration(1000);
+                        //animation.setFillAfter(false);
+                        //arg0.startAnimation(animation);
+
+                    }
 
 
                 }
                 if(arg0.getX()<=refusePos)
                 {
+                    //call accepted
                     System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
                     Intent intent = new Intent(arg0.getContext(), Main2Activity.class);
                     arg0.getContext().startActivity(intent);
+                    arg0.setX(refusePos-80);
 
 
                     Toast.makeText(arg0.getContext(), "Call refused ", Toast.LENGTH_SHORT).show();
 
                 }
+                else
+                {
+                    if(arg0.getX()<initX-arg0.getWidth()/2){
+                        //in this bloc, we should return img to initial position
+
+
+                    }
+
+                }
+
+
                 return true;
             } else if (action == MotionEvent.ACTION_UP) {
                 isDragging = false;

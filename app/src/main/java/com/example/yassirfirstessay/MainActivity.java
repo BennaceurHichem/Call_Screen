@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity
     private int xDelta;
     private int yDelta;
     private ViewGroup mainLayout;
-    private ImageView img;
+    private ImageView img,right,left;
     private GestureDetector mGestureDetector;
-    private int initialX,initialY,maxDelta,refusePos,acceptPos;
+    private int initialX,initialY,maxDelta,refusePos,acceptPos,rightPos,leftPos;
 
 
 
@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity
         img = findViewById(R.id.user_img);
         accept = findViewById(R.id.accept);
         refuse = findViewById(R.id.refuse);
+        right = findViewById(R.id.right_btn);
+        left = findViewById(R.id.left_btn);
+
 
         //ConstrainLayout isntatiation
         mainLayout = (ConstraintLayout) findViewById(R.id.root);
@@ -106,13 +109,14 @@ public class MainActivity extends AppCompatActivity
                 // don't forget to remove this OnGlobalLayoutListener using removeOnGlobalLayoutListener in here.
 
                 initialY = (int) img.getY();
+
                 initialX = (int) img.getX()+img.getWidth()/2;
                 final int[] location =  new int[2];
                 //accept.getLocationOnScreen(location);
-
-
-                acceptPos = (int) accept.getX()-40;
-                refusePos = (int) refuse.getX()+refuse.getWidth();
+                rightPos = (int)left.getX();
+                leftPos = (int) left.getX();
+                acceptPos = (int) (rightPos+accept.getX())/2;
+                refusePos = (int) (refuse.getX()+leftPos)/2;
                 maxDelta = (int) acceptPos - initialX;
                 DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta);
                 img.setOnTouchListener(dragObject);
