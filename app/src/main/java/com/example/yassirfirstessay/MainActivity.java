@@ -2,43 +2,40 @@ package com.example.yassirfirstessay;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.MotionEventCompat;
-import androidx.core.view.ScaleGestureDetectorCompat;
 
-import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.makeramen.roundedimageview.RoundedImageView;
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.skyfishjy.library.RippleBackground;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity
+{
 
 
-        private  TextView src,srcChemin,dest,destChemin,costMessage,costValue,time ;
-        private ImageButton destCircle,srcCircle;
-        private ImageView fleche;
-        private View view1,view2;
-        private boolean stayShaked;
-        private RippleBackground rippleBack;
-        private int xDelta;
-        private int yDelta;
-        private ViewGroup mainLayout;
-        private ImageView img;
-        private GestureDetector mGestureDetector;
+    private TextView src, srcChemin, dest, destChemin, costMessage, costValue, time;
+    private ImageButton destCircle, srcCircle;
+    private ImageView fleche, accept, refuse;
+    private View view1, view2;
+    private boolean stayShaked;
+    private RippleBackground rippleBack;
+    private int xDelta;
+    private int yDelta;
+    private ViewGroup mainLayout;
+    private ImageView img;
+    private GestureDetector mGestureDetector;
+    private int initialX,initialY,maxDelta,refusePos,acceptPos;
+
+
 
 
     @Override
@@ -56,10 +53,12 @@ public class MainActivity extends AppCompatActivity  {
         costMessage = findViewById(R.id.cost_message);
         costValue = findViewById(R.id.cost_value);
         time = findViewById(R.id.time);
-        img= findViewById(R.id.user_img);
+        img = findViewById(R.id.user_img);
+        accept = findViewById(R.id.accept);
+        refuse = findViewById(R.id.refuse);
 
         //ConstrainLayout isntatiation
-        mainLayout =  (ConstraintLayout) findViewById(R.id.root);
+        mainLayout = (ConstraintLayout) findViewById(R.id.root);
 
         srcChemin.bringToFront();
         destChemin.bringToFront();
@@ -76,8 +75,7 @@ public class MainActivity extends AppCompatActivity  {
         stayShaked = true;
 
 
-            Drawable imgBack = img.getBackground();
-
+        Drawable imgBack = img.getBackground();
 
 
         //rippleBack = (RippleBackground)img.getBackground();
@@ -96,13 +94,37 @@ public class MainActivity extends AppCompatActivity  {
 // Create an object of the Android_Gesture_Detector  Class
         //Android_Gesture_Detector  android_gesture_detector  =  new Android_Gesture_Detector();
 // Create a GestureDetector
-       // mGestureDetector = new GestureDetector(this, android_gesture_detector);
+        // mGestureDetector = new GestureDetector(this, android_gesture_detector);
 
-         // img.setOnTouchListener(onTouchListener());
+        // img.setOnTouchListener(onTouchListener());
 // in onCreate of the containing view
-        img.setOnTouchListener(new DragExperimentTouchListener(img.getX(), img.getY()));
-          onShakeView(img);
-          //img.getBackgroundTintMode("repeat");
+
+        img.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // do something about the view's x and y. also
+                // don't forget to remove this OnGlobalLayoutListener using removeOnGlobalLayoutListener in here.
+
+                initialY = (int) img.getY();
+                initialX = (int) img.getX()+img.getWidth()/2;
+                final int[] location =  new int[2];
+                //accept.getLocationOnScreen(location);
+
+
+                acceptPos = (int) accept.getX()-40;
+                refusePos = (int) refuse.getX()+refuse.getWidth();
+                maxDelta = (int) acceptPos - initialX;
+                DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta);
+                img.setOnTouchListener(dragObject);
+
+
+                float lastXImage = dragObject.lastX;
+                float deltaX = dragObject.deltaX;
+
+
+            }
+
+    });
 
 
 
@@ -110,13 +132,26 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
-
-
-
-
-
+        onShakeView(img);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void onShakeView(View v) {
@@ -134,49 +169,5 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-    private View.OnTouchListener onTouchListener() {
-        return new View.OnTouchListener() {
 
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-
-                final int x = (int) event.getRawX();
-                final int y = (int) event.getRawY();
-
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                    case MotionEvent.ACTION_DOWN:
-                      ConstraintLayout.LayoutParams lParams = (ConstraintLayout.LayoutParams)
-                            view.getLayoutParams();
-
-                    xDelta = x - lParams.leftMargin;
-                    yDelta = y - lParams.topMargin;
-                    break;
-
-                    case MotionEvent.ACTION_UP:
-                        Toast.makeText(MainActivity.this, "thanks for new location!", Toast.LENGTH_SHORT)
-                         .show();
-                    break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) view
-                                .getLayoutParams();
-                        layoutParams.leftMargin = x- xDelta;
-                        layoutParams.topMargin = y - yDelta;
-                        layoutParams.rightMargin = -50;
-                        layoutParams.bottomMargin = -50;
-                        view.setLayoutParams(layoutParams);
-                        break;
-
-
-
-
-
-                }
-                mainLayout.invalidate();
-                return true;
-            }
-        };
-    }
 }
