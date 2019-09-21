@@ -133,30 +133,6 @@
         app:layout_constraintStart_toStartOf="@+id/src_circle"
         app:layout_constraintTop_toBottomOf="@+id/src_circle" />
 
-    <ImageView
-        android:id="@+id/user_img"
-        android:layout_width="153dp"
-        android:layout_height="156dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/color_bg"
-
-
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_horizontal"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_online"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/right_btn"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/left_btn"
-        app:layout_constraintTop_toBottomOf="@+id/second_view" />
-
     <TextView
         android:id="@+id/cost_message"
         android:layout_width="wrap_content"
@@ -184,6 +160,7 @@
         app:layout_constraintEnd_toEndOf="@+id/second_view"
         app:layout_constraintStart_toEndOf="@+id/dest_circle"
         app:layout_constraintTop_toBottomOf="@+id/dest_place" />
+
 
     <TextView
         android:id="@+id/time_text"
@@ -288,7 +265,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/star"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_img" />
 
@@ -312,6 +289,31 @@
         app:layout_constraintTop_toTopOf="@+id/star" />
 
     <View
+        android:id="@+id/view2"
+        android:layout_width="258dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/second_view"
+        app:layout_constraintTop_toBottomOf="@+id/chemin_src" />
+
+    <View
+        android:id="@+id/second_view"
+        android:layout_width="343dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="12dp"
+
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <View
         android:id="@+id/view"
         android:layout_width="343dp"
         android:layout_height="94dp"
@@ -328,29 +330,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/second_view"
-        android:layout_width="343dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="12dp"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        android:background="#ffffff"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/user_img"
+        android:layout_width="153dp"
+        android:layout_height="153dp"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hichem"
+        app:civ_border_color="#3f51b5"
+
+        app:civ_border_width="4dp"
+        app:civ_shadow="true"
+
+        app:civ_shadow_color="#3f51b5"
+        app:civ_shadow_radius="10"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toStartOf="@+id/right_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/left_btn"
+        app:layout_constraintTop_toBottomOf="@+id/second_view" />
+
+    <com.skyfishjy.library.RippleBackground
+        android:id="@+id/content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+
+        app:layout_constraintBottom_toBottomOf="@+id/user_img"
+        app:layout_constraintEnd_toStartOf="@+id/right_btn"
+        app:layout_constraintStart_toEndOf="@+id/left_btn"
+
+        app:layout_constraintTop_toTopOf="@+id/user_img"
+        app:rb_color="#0099CC"
+        app:rb_duration="3000"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="4"
+        app:rb_type="strokeRipple"
+        app:rb_strokeWidth="4dp"
 
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="258dp"
-        android:layout_height="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="@+id/second_view"
-        app:layout_constraintTop_toBottomOf="@+id/chemin_src" />
+
+        app:rb_scale="6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

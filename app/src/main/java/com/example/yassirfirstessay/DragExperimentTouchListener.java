@@ -5,17 +5,25 @@ package com.example.yassirfirstessay;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.RippleDrawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
+import com.muddzdev.styleabletoast.StyleableToast;
+import com.skyfishjy.library.RippleBackground;
+
 public class DragExperimentTouchListener implements View.OnTouchListener {
     float initX;
+    private int mScreenWidthInPixel;
+    private int mScreenWidthInDp;
+    private RippleBackground rippleBack;
 
 
-    public DragExperimentTouchListener(float initialX, float initialY, float refusePos, float acceptPos, float maxDelta) {
+    public DragExperimentTouchListener(float initialX, float initialY, float refusePos, float acceptPos, float maxDelta,RippleBackground  ripple) {
 
         initX= initialX;
 
@@ -24,6 +32,7 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
         this.acceptPos = acceptPos;
         this.maxDelta = maxDelta;
         this.refusePos = refusePos;
+        this.rippleBack = ripple;
 
 
     }
@@ -48,6 +57,11 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
         } else if (isDragging) {
             if (action == MotionEvent.ACTION_MOVE) {
 
+
+                //when image moves ==> stop animation
+                rippleBack.stopRippleAnimation();
+
+
                 float current = arg0.getX() + arg1.getX() - deltaX;
 
                 arg0.setX(arg0.getX() + arg1.getX() - deltaX);
@@ -64,7 +78,13 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                     System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
                     Intent intent = new Intent(arg0.getContext(), Main2Activity.class);
                     arg0.getContext().startActivity(intent);
-                    Toast.makeText(arg0.getContext(), "Call accepted ", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(arg0.getContext(), "Call accepted ", Toast.LENGTH_SHORT).show();
+                    new StyleableToast
+                            .Builder(arg0.getContext())
+                            .text("Call accepted")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.BLUE)
+                            .show();
                     arg0.setX(acceptPos+20);
 
 
@@ -72,8 +92,8 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 else
                 {
                     if(arg0.getX()>initX-arg0.getWidth()/2){
-                       // Animation animation = new TranslateAnimation(arg0.getX(), initX-arg0.getWidth()/2,0, 0);
-                        //animation.setDuration(1000);
+                       // Animation animation = new TranslateAnimation(arg0.getX()-arg0.getWidth(), initX-arg0.getWidth()/2,0, 0);
+                       // animation.setDuration(300);
                         //animation.setFillAfter(false);
                         //arg0.startAnimation(animation);
 
@@ -89,8 +109,13 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                     arg0.getContext().startActivity(intent);
                     arg0.setX(refusePos-80);
 
-
-                    Toast.makeText(arg0.getContext(), "Call refused ", Toast.LENGTH_SHORT).show();
+                    new StyleableToast
+                            .Builder(arg0.getContext())
+                            .text("Call refused")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.RED)
+                            .show();
+                    //Toast.makeText(arg0.getContext(), "Call refused ", Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -117,14 +142,7 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 return true;
             }
 
-            if (lastX==acceptPos)
-            {
-                System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
-                //Intent intent = new Intent(context, TouchActivity.class);
-                //context.startActivity(intent);
-                Toast.makeText(context, "intent ..", Toast.LENGTH_SHORT).show();
 
-            }
         }
 
 

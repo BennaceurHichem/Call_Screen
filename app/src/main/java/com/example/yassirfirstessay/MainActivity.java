@@ -1,11 +1,12 @@
 package com.example.yassirfirstessay;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.skyfishjy.library.RippleBackground;
 
 public class MainActivity extends AppCompatActivity
@@ -31,13 +33,16 @@ public class MainActivity extends AppCompatActivity
     private int xDelta;
     private int yDelta;
     private ViewGroup mainLayout;
-    private ImageView img,right,left;
+    private ImageView right,left;
+    private CircularImageView img;
     private GestureDetector mGestureDetector;
     private int initialX,initialY,maxDelta,refusePos,acceptPos,rightPos,leftPos;
+    private RippleBackground rippleBackground;
 
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity
         refuse = findViewById(R.id.refuse);
         right = findViewById(R.id.right_btn);
         left = findViewById(R.id.left_btn);
+
+        rippleBackground = findViewById(R.id.content);
 
 
         //ConstrainLayout isntatiation
@@ -118,7 +125,11 @@ public class MainActivity extends AppCompatActivity
                 acceptPos = (int) (rightPos+accept.getX())/2;
                 refusePos = (int) (refuse.getX()+leftPos)/2;
                 maxDelta = (int) acceptPos - initialX;
-                DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta);
+
+
+
+
+                DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta,rippleBackground);
                 img.setOnTouchListener(dragObject);
 
 
@@ -131,12 +142,16 @@ public class MainActivity extends AppCompatActivity
     });
 
 
+            //Rippling and shaking image
+                    onShakeRippleView(img,rippleBackground);
 
 
 
 
 
-        onShakeView(img);
+
+
+
     }
 
 
@@ -158,14 +173,16 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public void onShakeView(View v) {
+    public void onShakeRippleView(View v,RippleBackground rippleBackground) {
         Animation shake;
         int shaketrue;
+
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
 
         shake.setRepeatCount(Animation.INFINITE);
 
             v.startAnimation(shake); // starts animation
+        rippleBackground.startRippleAnimation();
 
 
 
