@@ -99,9 +99,9 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 if (Math.round(arg0.getX())>=Math.round(acceptPos+50) )
                 {
 
-                    if(MainActivity.img.getVisibility()==View.VISIBLE)
-                                MainActivity.img.setVisibility(View.INVISIBLE);
 
+
+                    MainActivity.img.setVisibility(View.INVISIBLE);
                     rippleBack.stopRippleAnimation();
                     rippleBack.setVisibility(View.INVISIBLE);
 
@@ -127,7 +127,7 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
 
                     rippleBack.stopRippleAnimation();
 
-                    //arg0.setX(initX);
+                    arg0.setX(acceptPos-50);
 
 
                 }
@@ -164,8 +164,12 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 isDragging = false;
                 lastX = arg1.getX();
                 lastY = arg1.getY();
-                arg0.setX(initX-arg0.getWidth()/2);
+
                 rippleBack.startRippleAnimation();
+                if(Math.round(arg0.getX())<Math.round(acceptPos+50))
+                {
+                    arg0.setX(initX-arg0.getWidth()/2);
+                }
 
 
                 return true;
@@ -173,6 +177,7 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 arg0.setX(lastX);
                 arg0.setY(lastY);
                 isDragging = false;
+                MainActivity.img.setVisibility(View.INVISIBLE);
                 return true;
             }
 
