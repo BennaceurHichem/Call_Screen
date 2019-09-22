@@ -126,7 +126,6 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                             .show();
 
                     rippleBack.stopRippleAnimation();
-
                     arg0.setX(acceptPos-50);
 
 

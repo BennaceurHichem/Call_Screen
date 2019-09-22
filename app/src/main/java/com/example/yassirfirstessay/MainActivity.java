@@ -94,31 +94,9 @@ public class MainActivity extends AppCompatActivity
         costMessage.bringToFront();
         costValue.bringToFront();
         stayShaked = true;
+        img.bringToFront();
 
         mcontext = getApplicationContext();
-        Drawable imgBack = img.getBackground();
-
-
-        //rippleBack = (RippleBackground)img.getBackground();
-
-        //rippleBack.setActivated(true);
-        img.bringToFront();
-        //Translation animation
-
-        //Animation animation = new TranslateAnimation(0, 100,0, 0);
-        //animation.setDuration(1000);
-        //animation.setFillAfter(true);
-        //costValue.startAnimation(animation);
-        //costValue.setVisibility(View.INVISIBLE);
-
-
-// Create an object of the Android_Gesture_Detector  Class
-        //Android_Gesture_Detector  android_gesture_detector  =  new Android_Gesture_Detector();
-// Create a GestureDetector
-        // mGestureDetector = new GestureDetector(this, android_gesture_detector);
-
-        // img.setOnTouchListener(onTouchListener());
-// in onCreate of the containing view
 
         img.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
