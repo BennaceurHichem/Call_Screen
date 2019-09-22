@@ -2,17 +2,22 @@ package com.example.yassirfirstessay;
 
 
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.RippleDrawable;
+import android.net.Uri;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.skyfishjy.library.RippleBackground;
 
@@ -20,19 +25,27 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
     float initX;
     private int mScreenWidthInPixel;
     private int mScreenWidthInDp;
+    private float density;
     private RippleBackground rippleBack;
+    private Context MainActivityContext;
+    private boolean acceptedCall=false;
+    private boolean refusedCall=false;
+    //int screenWisdthInDp;
 
 
-    public DragExperimentTouchListener(float initialX, float initialY, float refusePos, float acceptPos, float maxDelta,RippleBackground  ripple) {
+    public DragExperimentTouchListener(float initialX, float initialY, float refusePos, float acceptPos, float maxDelta,RippleBackground  ripple,Context context,float density) {
 
-        initX= initialX;
+        initX= initialX ;
 
-        lastX = initialX;
-        lastY = initialY;
-        this.acceptPos = acceptPos;
-        this.maxDelta = maxDelta;
-        this.refusePos = refusePos;
+        lastX = initialX ;
+        lastY = initialY ;
+        this.acceptPos = acceptPos ;
+        this.maxDelta = maxDelta ;
+        this.refusePos = refusePos ;
         this.rippleBack = ripple;
+        this.MainActivityContext =context;
+        this.density = density;
+
 
 
     }
@@ -44,69 +57,92 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
     float refusePos;
     final float acceptPos;
     final float maxDelta;
+
     Context context;
 
     @Override
-    public boolean onTouch(View arg0, MotionEvent arg1) {
+    public boolean onTouch( View arg0, final MotionEvent arg1) {
 
         int action = arg1.getAction();
         if (action == MotionEvent.ACTION_DOWN && !isDragging) {
             isDragging = true;
-            deltaX = arg1.getX();
+            deltaX = arg1.getX() ;
             return true;
         } else if (isDragging) {
             if (action == MotionEvent.ACTION_MOVE) {
 
-
-                //when image moves ==> stop animation
-                rippleBack.stopRippleAnimation();
+            System.out.println("initial x : "+arg0.getX() + "Screen width in dp : "+mScreenWidthInDp);
 
 
-                float current = arg0.getX() + arg1.getX() - deltaX;
 
-                arg0.setX(arg0.getX() + arg1.getX() - deltaX);
-                arg0.setY(arg0.getY());
+                float current = (arg0.getX() + arg1.getX() - deltaX) ;
+
+                arg0.setX((arg0.getX() + arg1.getX() - deltaX) );
+                arg0.setY(arg0.getY() );
 
                 //traitement de toute les cas de image moving
 
                 System.out.println("checkmarkPos:  "+acceptPos+"currentPos:  "+current+"refusePos:  "+refusePos);
 
 
-                if (arg0.getX()>=acceptPos)
+                if(Math.round(arg0.getX() )!=Math.round(initX ))
                 {
-                    //call accepted
+                    //when image moves ==> stop animation
+                    rippleBack.stopRippleAnimation();
+                }
+                else
+                {
+                    rippleBack.startRippleAnimation();
+                }
+
+
+                if (Math.round(arg0.getX())>=Math.round(acceptPos+50) )
+                {
+
+                    if(MainActivity.img.getVisibility()==View.VISIBLE)
+                                MainActivity.img.setVisibility(View.INVISIBLE);
+
+                    rippleBack.stopRippleAnimation();
+                    rippleBack.setVisibility(View.INVISIBLE);
+
                     System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
-                    Intent intent = new Intent(arg0.getContext(), Main2Activity.class);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=com.example.android"));
+
                     arg0.getContext().startActivity(intent);
+
+                    acceptedCall=true;
+
+
+
+
                         //Toast.makeText(arg0.getContext(), "Call accepted ", Toast.LENGTH_SHORT).show();
                     new StyleableToast
                             .Builder(arg0.getContext())
+
                             .text("Call accepted")
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.BLUE)
                             .show();
-                    arg0.setX(acceptPos+20);
+
+                    rippleBack.stopRippleAnimation();
+
+                    //arg0.setX(initX);
 
 
                 }
-                else
+
+                if(Math.round(arg0.getX())<=Math.round(refusePos-80))
                 {
-                    if(arg0.getX()>initX-arg0.getWidth()/2){
-                       // Animation animation = new TranslateAnimation(arg0.getX()-arg0.getWidth(), initX-arg0.getWidth()/2,0, 0);
-                       // animation.setDuration(300);
-                        //animation.setFillAfter(false);
-                        //arg0.startAnimation(animation);
+                    //call refused
 
-                    }
-
-
-                }
-                if(arg0.getX()<=refusePos)
-                {
-                    //call accepted
+                    refusedCall=true;
                     System.out.println("LastX = "+lastX+"AcceptPos"+acceptPos);
-                    Intent intent = new Intent(arg0.getContext(), Main2Activity.class);
-                    arg0.getContext().startActivity(intent);
+                    //Destroy the Activity
+                    System.exit(0);
+
+
+
                     arg0.setX(refusePos-80);
 
                     new StyleableToast
@@ -115,18 +151,12 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.RED)
                             .show();
+
+
                     //Toast.makeText(arg0.getContext(), "Call refused ", Toast.LENGTH_SHORT).show();
 
                 }
-                else
-                {
-                    if(arg0.getX()<initX-arg0.getWidth()/2){
-                        //in this bloc, we should return img to initial position
 
-
-                    }
-
-                }
 
 
                 return true;
@@ -134,6 +164,10 @@ public class DragExperimentTouchListener implements View.OnTouchListener {
                 isDragging = false;
                 lastX = arg1.getX();
                 lastY = arg1.getY();
+                arg0.setX(initX-arg0.getWidth()/2);
+                rippleBack.startRippleAnimation();
+
+
                 return true;
             } else if (action == MotionEvent.ACTION_CANCEL) {
                 arg0.setX(lastX);

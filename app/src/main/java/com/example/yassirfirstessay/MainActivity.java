@@ -4,13 +4,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.MediaRouteButton;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -24,6 +29,7 @@ public class MainActivity extends AppCompatActivity
 {
 
 
+
     private TextView src, srcChemin, dest, destChemin, costMessage, costValue, time;
     private ImageButton destCircle, srcCircle;
     private ImageView fleche, accept, refuse;
@@ -34,10 +40,15 @@ public class MainActivity extends AppCompatActivity
     private int yDelta;
     private ViewGroup mainLayout;
     private ImageView right,left;
-    private CircularImageView img;
+    public static CircularImageView img;
     private GestureDetector mGestureDetector;
     private int initialX,initialY,maxDelta,refusePos,acceptPos,rightPos,leftPos;
-    private RippleBackground rippleBackground;
+    private static RippleBackground rippleBackground;
+    private int mScreenWidthInPixel;
+    private int mScreenWidthInDp;
+    private float mDensity,mLengthOfSlider;
+    private Context mcontext;
+
 
 
 
@@ -84,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         costValue.bringToFront();
         stayShaked = true;
 
-
+        mcontext = getApplicationContext();
         Drawable imgBack = img.getBackground();
 
 
@@ -118,18 +129,23 @@ public class MainActivity extends AppCompatActivity
                 initialY = (int) img.getY();
 
                 initialX = (int) img.getX()+img.getWidth()/2;
+
                 final int[] location =  new int[2];
                 //accept.getLocationOnScreen(location);
                 rightPos = (int)left.getX();
                 leftPos = (int) left.getX();
                 acceptPos = (int) (rightPos+accept.getX())/2;
                 refusePos = (int) (refuse.getX()+leftPos)/2;
-                maxDelta = (int) acceptPos - initialX;
+                maxDelta =  acceptPos - initialX;
+
+                mDensity = getResources().getDisplayMetrics().density;
 
 
 
 
-                DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta,rippleBackground);
+
+
+                DragExperimentTouchListener dragObject = new DragExperimentTouchListener(initialX, initialY, refusePos, acceptPos, maxDelta,rippleBackground,mcontext,mDensity);
                 img.setOnTouchListener(dragObject);
 
 

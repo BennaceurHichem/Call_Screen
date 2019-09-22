@@ -64,11 +64,11 @@
 
         android:padding="2dp"
         android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@+id/left_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/content"
         app:layout_constraintEnd_toStartOf="@+id/left_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/left_btn"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/content"
+        app:layout_constraintVertical_bias="0.503"
         app:srcCompat="@drawable/cross" />
 
     <ImageButton
@@ -261,11 +261,11 @@
         android:gravity="center"
         android:text="Hichem Bennaceur"
         android:textColor="@android:color/white"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/star"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_img" />
 
@@ -360,25 +360,26 @@
 
     <com.skyfishjy.library.RippleBackground
         android:id="@+id/content"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
 
         app:layout_constraintBottom_toBottomOf="@+id/user_img"
         app:layout_constraintEnd_toStartOf="@+id/right_btn"
         app:layout_constraintStart_toEndOf="@+id/left_btn"
 
+
         app:layout_constraintTop_toTopOf="@+id/user_img"
         app:rb_color="#0099CC"
         app:rb_duration="3000"
         app:rb_radius="32dp"
         app:rb_rippleAmount="4"
-        app:rb_type="strokeRipple"
-        app:rb_strokeWidth="4dp"
+        app:rb_scale="6"
+        app:rb_strokeWidth="12dp"
 
 
 
-        app:rb_scale="6" />
+        app:rb_type="strokeRipple" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
